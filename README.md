@@ -207,11 +207,11 @@ The MDS scripts contain separate data-loading functions. If the raw-data or pred
 
 For example, if the PRaM rating column is named rating instead of `key_resp_2.keys`, replace:
 
-row["key_resp_2.keys"]
+row`["key_resp_2.keys"]`
 
 with:
 
-row["rating"]
+row`["rating"]`
 
 in the relevant loading function.
 
