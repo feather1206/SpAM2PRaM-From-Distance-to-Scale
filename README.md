@@ -93,6 +93,88 @@ SpAM2PRaM/
 ```
 Each directory is self-contained and includes the modules required for data loading, model fitting, evaluation, visualization, and result export.
 
+# Usage
+Two analysis workflows are provided.
+
+## Stimulus-based analysis
+| Purpose | File |
+| --- | --- |
+| Compare prediction models across different numbers of training stimuli | `main_compare_models.py` |
+| Predict PRaM ratings for unmeasured stimulus pairs | `main_prediction.py` |
+| Compare predicted and measured similarity structures using MDS and Procrustes analysis | `mds_analysis.py` |
+
+Recommended order:
+```
+python main_compare_models.py
+python main_prediction.py
+python mds_analysis.py
+```
+
+## Participant-based analysis
+| Purpose | File |
+| --- | --- |
+| Compare prediction models across different numbers of training participants | `main_compare_models.py` |
+| Predict PRaM ratings for held-out participants | `main_prediction.py` |
+| Run the MDS and Procrustes analyses | `mds_analysis.py` |
+
+Recommended order:
+```
+python main_compare_models.py
+python main_prediction.py
+python main_mds_analysis.py
+```
+
+# Data Preparation
+
+## PRaM data
+Place one CSV file per participant in:
+
+| `PRaM_data/` |
+
+Each CSV file must contain the following columns:
+
+| `images_ocha_A`|
+| `key_resp_2.keys`|
+
+Example:
+
+```
+images_ocha_A,key_resp_2.keys
+1_2.png,6
+1_3.png,4
+1_4.png,5
+```
+
+The stimulus pair is identified from the A_B numbers in the filename, and key_resp_2.keys contains the 1–7 PRaM similarity rating.
+
+## SpAM data
+Place one CSV file per participant in:
+
+| `SpAM_data/`|
+
+Each CSV file must contain a square distance matrix after the following marker:
+
+Distance Matrix:
+
+Example:
+```
+Distance Matrix:
+0,120.4,350.2
+120.4,0,180.5
+350.2,180.5,0
+```
+
+For 16 stimuli, each file must contain a 16 × 16 distance matrix.
+
+For the participant-based analysis, the PRaM and SpAM filenames must sort in the same participant order. Using matching filenames is recommended:
+```
+PRaM_data/P01.csv
+SpAM_data/P01.csv
+
+PRaM_data/P02.csv
+SpAM_data/P02.csv
+```
+
 # Prerequisites
 
 ## Software requirements
