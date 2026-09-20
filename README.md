@@ -175,6 +175,47 @@ PRaM_data/P02.csv
 SpAM_data/P02.csv
 ```
 
+## Using a Different Data Format
+
+If the input CSV format differs from the format described above, modify the data-loading functions while preserving the internal column names used by the analysis.
+
+| Data to modify | File | Function |
+| --- | --- | --- |
+| PRaM filename, pair-ID pattern, rating column, or CSV structure | `data.py` | `read_pram_folder()` |
+| SpAM participant-file processing | `data.py` | `read_one_spam()` |
+| PRaM or SpAM directory path | `data.py` | `read_spam_folder()` |
+| PRaM or SpAM directory path | `config.py` | `PRAM_DIR` and `SPAM_DIR` |
+
+The modified readers should continue to return the following internal formats.
+```
+PRaM:
+
+Subject, A, B, Resp
+
+SpAM:
+
+Subject, A, B, Distance
+```
+If only the original CSV column names differ, it is generally sufficient to edit data.py. The remaining model and evaluation files do not need to be modified as long as these internal column names are preserved.
+
+The MDS scripts contain separate data-loading functions. If the raw-data or prediction-file format is changed, the corresponding MDS loader must also be updated.
+
+| Workflow | File | Functions to modify |
+| --- | --- | --- |
+| Stimulus-based MDS | `mds_analysis.py` | `load_pram_matrix()` and `load_prediction_matrix()` |
+| Participant-based MDS | `main_mds_analysis.py` | `load_pram_matrix()`, `load_spam_matrix()`, and `load_prediction_matrix()` |
+
+For example, if the PRaM rating column is named rating instead of `key_resp_2.keys`, replace:
+
+row["key_resp_2.keys"]
+
+with:
+
+row["rating"]
+
+in the relevant loading function.
+
+
 # Prerequisites
 
 ## Software requirements
