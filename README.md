@@ -11,7 +11,7 @@ SpAM allows participants to represent perceived similarity by freely arranging m
 However, SpAM produces spatial distances rather than conventional rating-scale values. By contrast, PRaM directly measures the perceived similarity of each stimulus pair using a 1–7 scale.
 
 SpAM2PRaM uses SpAM distance as the explanatory variable and PRaM rating as the target variable:
-’’’
+```
 SpAM distance
       ↓
 Prediction model
@@ -27,4 +27,5 @@ Lasso Regression
 Random Forest
 XGBoost
 K-Nearest Neighbors
-’’’
+```
+
